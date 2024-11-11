@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  gap: 20px;
+}
+
+.column-selector {
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+}
+
+.table {
+  display: grid;
+  width: 100%;
+}
+
+.table-header,
+.table-row {
+  display: grid;
+  width: 100%;
+  border-bottom: 1px solid #afafaf;
+}
+
+.table-cell,
+.header-cell {
+  padding: 10px;
+  border: 1px solid #afafaf;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.header-cell {
+  font-weight: bold;
+  background-color: #88bdd8;
+}
