@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Country } from '../../types/types';
 import axios from 'axios';
+import { Country } from '../../types/types';
 
 export const getCountries = createAsyncThunk<Country[]>(
   'countries/getCountries',

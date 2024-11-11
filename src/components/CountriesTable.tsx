@@ -1,4 +1,3 @@
-// components/CountriesTable.tsx
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
@@ -8,9 +7,13 @@ const CountriesTable: React.FC = () => {
   const { countries, activeColumns } = useSelector(
     (state: RootState) => state.countries,
   );
+//вычмсляем максимальное значение относительно первого столбца
+  const maxLength = Math.max(
+    ...countries.map((country) => country.name.common.length),
+  );
 
   const gridStyle = {
-    gridTemplateColumns: `repeat(${activeColumns.length}, 1fr)`,
+    gridTemplateColumns: `minmax(${maxLength * 5 }px, 1fr) minmax(${maxLength * 5 }px, 1fr) repeat(${activeColumns.length - 2}, 1fr)`,
   };
 
   return (
@@ -51,13 +54,10 @@ const CountriesTable: React.FC = () => {
               )}
             </div>
 
-            {activeColumns.includes('languages') && Object.keys(country.languages).length > 1 &&
+            {activeColumns.includes('languages') &&
+              Object.keys(country.languages).length > 1 &&
               Object.values(country.languages).map((language, index) => (
-                <div
-                  key={index}
-                  className="table-row"
-                  style={gridStyle}
-                >
+                <div key={index} className="table-row" style={gridStyle}>
                   <div className="table-cell"></div>
                   <div className="table-cell">{language}</div>
                   {/* создаем массив, из длинны которого вычитается -2, так как первая ячейка пустая, а вторая содержит в себе язык */}
