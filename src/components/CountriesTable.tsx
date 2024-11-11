@@ -2,7 +2,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
-import '../styles/CountriesTable.scss';
+import '../styles/countriesTable.scss';
 
 const CountriesTable: React.FC = () => {
   const { countries, activeColumns } = useSelector(
