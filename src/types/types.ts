@@ -17,3 +17,15 @@ export interface CountriesState {
   error: string | null;
   activeColumns: string[];
 }
+
+export interface CountriesTableProps {
+  columns: {
+    id: string;
+    title: string;
+    width?: string;
+    visible: boolean;
+    isWide?: boolean;
+    cellColor?: string;
+    emptyCellColor?: string;
+  }[];
+}

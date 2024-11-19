@@ -15,7 +15,14 @@ module.exports = {
   },
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
-    'import/extensions': 'on',
+    'react/function-component-definition': [
+      'error',
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
+      },
+    ],
+    '@typescript-eslint/no-unused-expressions': 'off',
     'import/no-unresolved': 'off',
     'prettier/prettier': [
       'error',
