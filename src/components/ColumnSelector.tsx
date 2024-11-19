@@ -3,30 +3,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { toggleColumn } from '../store/countriesStore/countriesSlice';
 
-const ColumnSelector: React.FC = () => {
+interface ColumnConfig {
+  id: string;
+  title: string;
+  visible: boolean;
+}
+
+const ColumnSelector: React.FC<{ columns: ColumnConfig[] }> = ({ columns }) => {
   const dispatch = useDispatch();
   const { activeColumns } = useSelector((state: RootState) => state.countries);
 
-  const columns = [
-    'name',
-    'languages',
-    'region',
-    'population',
-    'status',
-    'startOfWeek',
-  ];
-
   return (
     <div className="column-selector">
-      <h3>Toggle column</h3>
+      <h3>Toggle Columns</h3>
       {columns.map((column) => (
-        <label key={column}>
+        <label key={column.id}>
           <input
             type="checkbox"
-            checked={activeColumns.includes(column)}
-            onChange={() => dispatch(toggleColumn(column))}
+            checked={activeColumns.includes(column.id)}
+            onChange={() => dispatch(toggleColumn(column.id))}
           />
-          {column}
+          {column.title}
         </label>
       ))}
     </div>
