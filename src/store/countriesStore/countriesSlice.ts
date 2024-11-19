@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { CountriesState } from '../../types/types';
 import { getCountries } from './countriesApi';
+import { CountriesState } from '../../types/types';
 
 const initialState: CountriesState = {
   countries: [],
   loading: false,
   error: null,
   activeColumns: [
+    'index',
     'name',
     'languages',
     'region',
@@ -20,7 +21,7 @@ const countriesSlice = createSlice({
   name: 'countries',
   initialState,
   reducers: {
-    toggleColumn: (state, action) => {
+    toggleColumn(state, action) {
       const column = action.payload;
       if (state.activeColumns.includes(column)) {
         state.activeColumns = state.activeColumns.filter(
@@ -50,5 +51,6 @@ const countriesSlice = createSlice({
       });
   },
 });
+
 export const { toggleColumn } = countriesSlice.actions;
 export default countriesSlice.reducer;
