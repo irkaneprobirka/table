@@ -5,7 +5,10 @@ import { getCountries } from './store/countriesStore/countriesApi';
 import CountriesTable from './components/CountriesTable';
 import ColumnSelector from './components/ColumnSelector';
 
+// TODO: Протипизируй исходный массив с колонками. Добавь параметр в объект колонки,
+// в котором можно будет определить контент ячейки для того, чтобы разгрузить код в CountriesTable.tsx
 const columns = [
+  // COMMENT: Параметр width дальше нигде не используется? В типах он тоже присутствует, нужно это учитывать.
   { id: 'index', title: '#', width: '60px', visible: true },
   {
     id: 'name',

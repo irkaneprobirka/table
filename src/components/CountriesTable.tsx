@@ -25,6 +25,12 @@ const CountriesTable: React.FC<CountriesTableProps> = ({ columns }) => {
     ...countries.map((country) => country.name.common.length),
   );
 
+  // TODO: Перенеси стили в .scss, инлайновые стили не очень рекомендуется использовать,
+  // к тому же в данном случае острой потребности в их использовании я здесь не вижу.
+  // Повторяющиеся значения для свойства grid-template-columns следует обернуть в repeat.
+  // P.S. Ширину колонки со свойством isWide можно регулировать через определение класса элемента
+  // и например свойства grid-column. В целом получается всего два сценария: колонка нумерации с шириной 60px
+  // либо присутствует либо нет.
   const gridStyle = {
     gridTemplateColumns: visibleColumns
       .map((col) => {
@@ -51,6 +57,9 @@ const CountriesTable: React.FC<CountriesTableProps> = ({ columns }) => {
           const languages = country.languages ? Object.keys(country.languages) : [];
           const canExpand = languages.length > 1;
 
+          // TODO: Функция которая возвращает JSX по своей сути является компонентом и должна быть названа и
+          // оформлена в соответствии с правилами оформления компонентов. Компонент следует переопределить
+          // где-нибудь в другом месте, чтобы не пересоздавать его при каждом рендере.
           const countryRow = (
             <div
               className={`table-row ${expandedRows.has(country.name.common) ? 'expanded' : ''}`}
