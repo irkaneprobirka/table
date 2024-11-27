@@ -1,3 +1,4 @@
+
 export interface Country {
   name: {
     common: string;
@@ -10,7 +11,6 @@ export interface Country {
   status: string;
   startOfWeek: string;
 }
-
 export interface CountriesState {
   countries: Country[];
   loading: boolean;
@@ -18,14 +18,27 @@ export interface CountriesState {
   activeColumns: string[];
 }
 
+export interface ColumnConfig {
+  id: string;
+  title: string;
+  width?: string; 
+  visible: boolean; 
+  isWide?: boolean; 
+  cellColor?: string; 
+  emptyCellColor?: string;
+  renderCell?: (country: Country) => React.ReactNode; 
+}
+
+
 export interface CountriesTableProps {
-  columns: {
-    id: string;
-    title: string;
-    width?: string;
-    visible: boolean;
-    isWide?: boolean;
-    cellColor?: string;
-    emptyCellColor?: string;
-  }[];
+  columns: ColumnConfig[];
+}
+export interface Column {
+  id: string;
+  title: string;
+  visible: boolean;
+  isWide?: boolean;
+  cellColor?: string;
+  emptyCellColor?: string;
+  contentRenderer?: (country: any) => React.ReactNode;
 }

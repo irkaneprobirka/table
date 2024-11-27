@@ -7,7 +7,7 @@ import ColumnSelector from './components/ColumnSelector';
 import { Column } from './types/types';
 
 const columns: Column[] = [
-  { id: 'index', title: '#', visible: true }, 
+  { id: 'index', title: '#', visible: true },//убран параметр, все и правда работает без него 
   {
     id: 'name',
     title: 'Name',

@@ -10,12 +10,13 @@
 .table {
   display: grid;
   width: 100%;
-  grid-template-columns: 1fr;
 
   .table-header {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 60px repeat(7, minmax(120px, 1fr));
+    
   }
+  
 
   .table-body {
     display: flex;
@@ -24,7 +25,7 @@
 
   .table-row {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 60px repeat(7, minmax(120px, 1fr));
     cursor: pointer;
     position: relative;
 
@@ -48,7 +49,7 @@
 
     &.language-row {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: 60px repeat(7, minmax(120px, 1fr));
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
@@ -70,6 +71,10 @@
       &.empty {
         background-color: transparent;
       }
+
+      &.wide {
+        grid-column: span 2;
+      }
     }
   }
 
@@ -77,6 +82,10 @@
     font-weight: bold;
     padding: 10px;
     background-color: #f4f4f4;
+
+    &.wide {
+      grid-column: span 2;
+    }
   }
   .languages-cell.can-expand {
     display: flex;
