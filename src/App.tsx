@@ -4,9 +4,10 @@ import { AppDispatch } from './store';
 import { getCountries } from './store/countriesStore/countriesApi';
 import CountriesTable from './components/CountriesTable';
 import ColumnSelector from './components/ColumnSelector';
+import { Column } from './types/types';
 
-const columns = [
-  { id: 'index', title: '#', width: '60px', visible: true },
+const columns: Column[] = [
+  { id: 'index', title: '#', visible: true }, 
   {
     id: 'name',
     title: 'Name',
@@ -14,6 +15,7 @@ const columns = [
     isWide: true,
     cellColor: 'lightblue',
     emptyCellColor: 'lightgray',
+    contentRenderer: (country) => country.name.common, 
   },
   {
     id: 'languages',
@@ -22,17 +24,24 @@ const columns = [
     isWide: false,
     cellColor: 'lightyellow',
     emptyCellColor: 'lightpink',
+    contentRenderer: (country) => {
+      const languages = country.languages ? Object.keys(country.languages) : [];
+      return languages.length > 1
+        ? `${languages.length} языка(ов)`
+        : languages.join(', ');
+    },
   },
   { id: 'region', title: 'Region', visible: true, isWide: false, emptyCellColor: 'lightpink', },
   {
     id: 'population',
     title: 'Population',
-    visible: false,
+    visible: true,
     isWide: false,
     cellColor: 'lightgreen',
+    contentRenderer: (country) => country.population,
   },
-  { id: 'status', title: 'Status', visible: true },
-  { id: 'startOfWeek', title: 'Start of Week', visible: true },
+  { id: 'status', title: 'Status', visible: true, contentRenderer: (country) => country.status },
+  { id: 'startOfWeek', title: 'Start of Week', visible: true, contentRenderer: (country) => country.startOfWeek },
 ];
 
 const App: React.FC = () => {
