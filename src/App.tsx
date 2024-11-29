@@ -4,10 +4,18 @@ import { AppDispatch } from './store';
 import { getCountries } from './store/countriesStore/countriesApi';
 import CountriesTable from './components/CountriesTable';
 import ColumnSelector from './components/ColumnSelector';
-import { Column } from './types/types';
+import { Column, Country } from './types/types';
+import { cellContentRender } from './utils/cellContentRender';
 
 const columns: Column[] = [
-  { id: 'index', title: '#', visible: true },//убран параметр, все и правда работает без него 
+  {
+    id: 'index',
+    title: '#',
+    visible: true,
+    contentRenderer: (country: Country, index : number) => {
+      return <span>{cellContentRender('index', country, index)}</span>;
+    },
+  },
   {
     id: 'name',
     title: 'Name',
@@ -15,7 +23,9 @@ const columns: Column[] = [
     isWide: true,
     cellColor: 'lightblue',
     emptyCellColor: 'lightgray',
-    contentRenderer: (country) => country.name.common, 
+    contentRenderer: (country: Country) => {
+      return <span>{cellContentRender('name', country?.name.common)}</span>;
+    },
   },
   {
     id: 'languages',
@@ -24,24 +34,46 @@ const columns: Column[] = [
     isWide: false,
     cellColor: 'lightyellow',
     emptyCellColor: 'lightpink',
-    contentRenderer: (country) => {
-      const languages = country.languages ? Object.keys(country.languages) : [];
-      return languages.length > 1
-        ? `${languages.length} языка(ов)`
-        : languages.join(', ');
+    contentRenderer: (country: Country) => {
+      return <span>{cellContentRender('languages', country.languages)}</span>;
     },
   },
-  { id: 'region', title: 'Region', visible: true, isWide: false, emptyCellColor: 'lightpink', },
+  {
+    id: 'region',
+    title: 'Region',
+    visible: true,
+    isWide: false,
+    emptyCellColor: 'lightpink',
+    contentRenderer: (country: Country) => {
+      return <span>{cellContentRender('region', country.region)}</span>;
+    },
+  },
   {
     id: 'population',
     title: 'Population',
     visible: true,
     isWide: false,
     cellColor: 'lightgreen',
-    contentRenderer: (country) => country.population,
+    contentRenderer: (country: Country) => {
+      return <span>{cellContentRender('population', country.population)}</span>;
+    },
   },
-  { id: 'status', title: 'Status', visible: true, contentRenderer: (country) => country.status },
-  { id: 'startOfWeek', title: 'Start of Week', visible: true, contentRenderer: (country) => country.startOfWeek },
+  {
+    id: 'status',
+    title: 'Status',
+    visible: true,
+    contentRenderer: (country: Country) => {
+      return <span>{cellContentRender('status', country.status)}</span>;
+    },
+  },
+  {
+    id: 'startOfWeek',
+    title: 'Start of Week',
+    visible: true,
+    contentRenderer: (country: Country) => {
+      return <span>{cellContentRender('startOfWeek', country.startOfWeek)}</span>;
+    },
+  },
 ];
 
 const App: React.FC = () => {

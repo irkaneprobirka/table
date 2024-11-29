@@ -7,24 +7,32 @@ import LanguageRow from './LanguageRow';
 import '../styles/countriesTable.scss';
 
 const CountriesTable: React.FC<CountriesTableProps> = ({ columns }) => {
-  const { countries, activeColumns } = useSelector((state: RootState) => state.countries);
+  const { countries, activeColumns } = useSelector(
+    (state: RootState) => state.countries
+  );
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
 
-  const toggleRow = (countryName: string) => setExpandedRows((prev) => {
-    const newSet = new Set(prev);
-    newSet.has(countryName) ? newSet.delete(countryName) : newSet.add(countryName);
-    return newSet;
-  });
+  const toggleRow = (countryName: string) =>
+    setExpandedRows(prev => {
+      const newSet = new Set(prev);
+      newSet.has(countryName)
+        ? newSet.delete(countryName)
+        : newSet.add(countryName);
+      return newSet;
+    });
 
-  const visibleColumns = columns.filter((col) => col.visible && activeColumns.includes(col.id));
-
-  const maxLength = Math.max(...countries.map((country) => country.name.common.length));
+  const visibleColumns = columns.filter(
+    col => col.visible && activeColumns.includes(col.id)
+  );
 
   return (
     <div className="table">
       <div className="table-header">
-        {visibleColumns.map((col) => (
-          <div key={col.id} className={`header-cell ${col.isWide ? 'wide' : ''}`}>
+        {visibleColumns.map(col => (
+          <div
+            key={col.id}
+            className={`header-cell ${col.isWide ? 'wide' : ''}`}
+          >
             {col.title}
           </div>
         ))}
@@ -32,7 +40,9 @@ const CountriesTable: React.FC<CountriesTableProps> = ({ columns }) => {
 
       <div className="table-body">
         {countries.map((country, index) => {
-          const languages = country.languages ? Object.keys(country.languages) : [];
+          const languages = country.languages
+            ? Object.keys(country.languages)
+            : [];
           const canExpand = languages.length > 1;
 
           return (
@@ -42,7 +52,7 @@ const CountriesTable: React.FC<CountriesTableProps> = ({ columns }) => {
                 visibleColumns={visibleColumns}
                 expandedRows={expandedRows}
                 toggleRow={toggleRow}
-                index={index} 
+                index={index}
               />
               {canExpand && (
                 <LanguageRow
