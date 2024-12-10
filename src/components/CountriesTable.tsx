@@ -8,27 +8,28 @@ import '../styles/countriesTable.scss';
 
 const CountriesTable: React.FC<CountriesTableProps> = ({ columns }) => {
   const { countries, activeColumns } = useSelector(
-    (state: RootState) => state.countries
+    (state: RootState) => state.countries,
   );
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
 
-  const toggleRow = (countryName: string) =>
-    setExpandedRows(prev => {
-      const newSet = new Set(prev);
-      newSet.has(countryName)
-        ? newSet.delete(countryName)
-        : newSet.add(countryName);
-      return newSet;
-    });
+  const toggleRow = (countryName: string) => setExpandedRows((prev) => {
+    const newSet = new Set(prev);
+    newSet.has(countryName)
+      ? newSet.delete(countryName)
+      : newSet.add(countryName);
+    return newSet;
+  });
 
   const visibleColumns = columns.filter(
-    col => col.visible && activeColumns.includes(col.id)
+    (col) => col.visible && activeColumns.includes(col.id),
   );
 
   return (
     <div className="table">
-      <div className="table-header">
-        {visibleColumns.map(col => (
+      <div
+        className={`table-header ${visibleColumns[0].id == 'index' ? 'table-header-index' : ''}`}
+      >
+        {visibleColumns.map((col) => (
           <div
             key={col.id}
             className={`header-cell ${col.isWide ? 'wide' : ''}`}

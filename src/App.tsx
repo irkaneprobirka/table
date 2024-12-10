@@ -5,16 +5,13 @@ import { getCountries } from './store/countriesStore/countriesApi';
 import CountriesTable from './components/CountriesTable';
 import ColumnSelector from './components/ColumnSelector';
 import { Column, Country } from './types/types';
-import { cellContentRender } from './utils/cellContentRender';
 
 const columns: Column[] = [
   {
     id: 'index',
     title: '#',
     visible: true,
-    contentRenderer: (country: Country, index : number) => {
-      return <span>{cellContentRender('index', country, index)}</span>;
-    },
+    contentRenderer: (_, index) => <span>{index + 1}</span>,
   },
   {
     id: 'name',
@@ -23,9 +20,7 @@ const columns: Column[] = [
     isWide: true,
     cellColor: 'lightblue',
     emptyCellColor: 'lightgray',
-    contentRenderer: (country: Country) => {
-      return <span>{cellContentRender('name', country?.name.common)}</span>;
-    },
+    contentRenderer: ({ name: { common } }: Country) => <span>{common}</span>,
   },
   {
     id: 'languages',
@@ -35,7 +30,10 @@ const columns: Column[] = [
     cellColor: 'lightyellow',
     emptyCellColor: 'lightpink',
     contentRenderer: (country: Country) => {
-      return <span>{cellContentRender('languages', country.languages)}</span>;
+      const languages = country.languages ? Object.keys(country.languages) : [];
+      return languages.length > 1
+        ? `${languages.length} языка(ов)`
+        : languages.join(', ');
     },
   },
   {
@@ -44,9 +42,7 @@ const columns: Column[] = [
     visible: true,
     isWide: false,
     emptyCellColor: 'lightpink',
-    contentRenderer: (country: Country) => {
-      return <span>{cellContentRender('region', country.region)}</span>;
-    },
+    contentRenderer: ({ region }: Country) => <span>{region}</span>,
   },
   {
     id: 'population',
@@ -54,25 +50,19 @@ const columns: Column[] = [
     visible: true,
     isWide: false,
     cellColor: 'lightgreen',
-    contentRenderer: (country: Country) => {
-      return <span>{cellContentRender('population', country.population)}</span>;
-    },
+    contentRenderer: ({ population }: Country) => <span>{population}</span>,
   },
   {
     id: 'status',
     title: 'Status',
     visible: true,
-    contentRenderer: (country: Country) => {
-      return <span>{cellContentRender('status', country.status)}</span>;
-    },
+    contentRenderer: ({ status }: Country) => <span>{status}</span>,
   },
   {
     id: 'startOfWeek',
     title: 'Start of Week',
     visible: true,
-    contentRenderer: (country: Country) => {
-      return <span>{cellContentRender('startOfWeek', country.startOfWeek)}</span>;
-    },
+    contentRenderer: ({ startOfWeek }: Country) => <span>{startOfWeek}</span>,
   },
 ];
 

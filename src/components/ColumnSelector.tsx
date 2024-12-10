@@ -16,7 +16,7 @@ const ColumnSelector: React.FC<{ columns: ColumnConfig[] }> = ({ columns }) => {
   return (
     <div className="column-selector">
       <h3>Toggle Columns</h3>
-      {columns.map(column => (
+      {columns.map((column) => (
         <label key={column.id}>
           <input
             type="checkbox"
