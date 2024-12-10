@@ -18,19 +18,8 @@ export interface CountriesState {
   activeColumns: string[];
 }
 
-export interface ColumnConfig {
-  id: string;
-  title: string;
-  width?: string;
-  visible: boolean;
-  isWide?: boolean;
-  cellColor?: string;
-  emptyCellColor?: string;
-  renderCell?: (country: Country) => React.ReactNode;
-}
-
 export interface CountriesTableProps {
-  columns: ColumnConfig[];
+  columns: Column[];
 }
 
 export interface Column {

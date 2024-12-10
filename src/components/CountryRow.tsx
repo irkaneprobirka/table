@@ -21,9 +21,9 @@ const CountryRow: React.FC<CountryRowProps> = ({
 
   return (
     <div
-      className={`table-row ${expandedRows.has(country.name.common) ? 'expanded' : ''}`}
+      className={`table-row ${visibleColumns[0].id == 'index' ? 'table-row-index' : ''} ${expandedRows.has(country.name.common) ? 'expanded' : ''}`}
     >
-      {visibleColumns.map(col => {
+      {visibleColumns.map((col) => {
         const cellContent = col.contentRenderer
           ? col.contentRenderer(country, index)
           : null;
@@ -41,7 +41,7 @@ const CountryRow: React.FC<CountryRowProps> = ({
             {col.id === 'languages' ? (
               <div
                 className={`languages-cell ${canExpand ? 'can-expand' : ''}`}
-                onClick={e => {
+                onClick={(e) => {
                   e.stopPropagation();
                   if (canExpand) toggleRow(country.name.common);
                 }}
