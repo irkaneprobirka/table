@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 import { getCountries } from './countriesApi';
 import { CountriesState } from '../../types/types';
 

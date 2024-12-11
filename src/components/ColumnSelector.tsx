@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { RootState } from '../store';
 import { toggleColumn } from '../store/countriesStore/countriesSlice';
 
@@ -16,7 +17,7 @@ const ColumnSelector: React.FC<{ columns: ColumnConfig[] }> = ({ columns }) => {
   return (
     <div className="column-selector">
       <h3>Toggle Columns</h3>
-      {columns.map((column) => (
+      {columns.map(column => (
         <label key={column.id}>
           <input
             type="checkbox"
