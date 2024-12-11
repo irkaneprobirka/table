@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface Country {
   name: {
     common: string;

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Column, Country } from '../types/types';
 
 interface LanguageRowProps {
@@ -18,7 +19,7 @@ const LanguageRow: React.FC<LanguageRowProps> = ({
 
   return languages.map((language, index) => (
     <div
-      className={`table-row language-row ${visibleColumns[0].id == 'index' ? 'table-row-index language-row-index' : ''} ${expandedRows.has(country.name.common) ? 'expanded' : ''}`}
+      className={`table-row language-row ${visibleColumns[0].id === 'index' ? 'table-row-index language-row-index' : ''} ${expandedRows.has(country.name.common) ? 'expanded' : ''}`}
       key={`${country.name.common}-lang-${index}`}
     >
       {visibleColumns.map((col) => (
