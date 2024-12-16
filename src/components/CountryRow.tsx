@@ -33,7 +33,7 @@ const CountryRow: React.FC<CountryRowProps> = ({
     >
       {visibleColumns.map(col => {
         const cellContent = col.contentRenderer
-          ? col.contentRenderer(country, index)
+          ? col.contentRenderer({ country: country, index: index + 1 })
           : null;
         const isEmpty = !cellContent;
 

@@ -24,6 +24,11 @@ export interface CountriesTableProps {
   columns: Column[];
 }
 
+interface Content {
+  country?: Country;
+  index?: number;
+}
+
 export interface Column {
   id: string;
   title: string;
@@ -31,5 +36,5 @@ export interface Column {
   isWide?: boolean;
   cellColor?: string;
   emptyCellColor?: string;
-  contentRenderer?: (country: Country, index: number) => React.ReactNode;
+  contentRenderer: (content: Content) => React.ReactNode;
 }

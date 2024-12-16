@@ -5,14 +5,14 @@ import { AppDispatch } from './store';
 import { getCountries } from './store/countriesStore/countriesApi';
 import CountriesTable from './components/CountriesTable';
 import ColumnSelector from './components/ColumnSelector';
-import { Column, Country } from './types/types';
+import { Column } from './types/types';
 
 const columns: Column[] = [
   {
     id: 'index',
     title: '#',
     visible: true,
-    contentRenderer: (_, index) => <span>{index + 1}</span>,
+    contentRenderer: ({ index }) => <span>{index}</span>,
   },
   {
     id: 'name',
@@ -21,7 +21,7 @@ const columns: Column[] = [
     isWide: true,
     cellColor: 'lightblue',
     emptyCellColor: 'lightgray',
-    contentRenderer: ({ name: { common } }: Country) => <span>{common}</span>,
+    contentRenderer: ({ country }) => <span>{country?.name?.common}</span>,
   },
   {
     id: 'languages',
@@ -30,8 +30,10 @@ const columns: Column[] = [
     isWide: false,
     cellColor: 'lightyellow',
     emptyCellColor: 'lightpink',
-    contentRenderer: (country: Country) => {
-      const languages = country.languages ? Object.keys(country.languages) : [];
+    contentRenderer: ({ country }) => {
+      const languages = country?.languages
+        ? Object.keys(country.languages)
+        : [];
       return languages.length > 1
         ? `${languages.length} языка(ов)`
         : languages.join(', ');
@@ -43,7 +45,7 @@ const columns: Column[] = [
     visible: true,
     isWide: false,
     emptyCellColor: 'lightpink',
-    contentRenderer: ({ region }: Country) => <span>{region}</span>,
+    contentRenderer: ({ country }) => <span>{country?.region}</span>,
   },
   {
     id: 'population',
@@ -51,19 +53,19 @@ const columns: Column[] = [
     visible: true,
     isWide: false,
     cellColor: 'lightgreen',
-    contentRenderer: ({ population }: Country) => <span>{population}</span>,
+    contentRenderer: ({ country }) => <span>{country?.population}</span>,
   },
   {
     id: 'status',
     title: 'Status',
     visible: true,
-    contentRenderer: ({ status }: Country) => <span>{status}</span>,
+    contentRenderer: ({ country }) => <span>{country?.status}</span>,
   },
   {
     id: 'startOfWeek',
     title: 'Start of Week',
     visible: true,
-    contentRenderer: ({ startOfWeek }: Country) => <span>{startOfWeek}</span>,
+    contentRenderer: ({ country }) => <span>{country?.startOfWeek}</span>,
   },
 ];
 
